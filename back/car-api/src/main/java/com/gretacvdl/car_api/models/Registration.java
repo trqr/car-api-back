@@ -13,7 +13,15 @@ public class Registration {
     private String plateNumber;
     private LocalDate expirationDate;
     @OneToOne
+    @JoinColumn(name = "car_id")
     private Car car;
+
+    public Registration(){}
+
+    public Registration(String plateNumber, LocalDate expirationDate) {
+        this.plateNumber = plateNumber;
+        this.expirationDate = expirationDate;
+    }
 
     public Long getId() {
         return id;

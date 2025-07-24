@@ -33,4 +33,5 @@ public class OwnerController {
     public ResponseEntity<Owner> createOwner(@Valid @RequestBody RequestOwnerDTO request){
         return ResponseEntity.status(HttpStatus.CREATED).body(ownerService.createOwner(request));
     }
+
 }

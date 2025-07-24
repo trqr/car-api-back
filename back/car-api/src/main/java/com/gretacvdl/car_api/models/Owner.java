@@ -1,10 +1,8 @@
 package com.gretacvdl.car_api.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,10 +12,15 @@ public class Owner {
     private Long id;
     private String name;
     private String email;
-    @OneToMany
-    private List<Car> ownedCars;
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Car> ownedCars = new ArrayList<>();
+
+
+    public Owner(){}
 
     public Owner(String name, String email) {
+        this.name = name;
+        this.email = email;
     }
 
     public Long getId() {
@@ -50,5 +53,10 @@ public class Owner {
 
     public void setOwnedCars(List<Car> ownedCars) {
         this.ownedCars = ownedCars;
+    }
+
+    public void addCar(Car car) {
+        car.setOwner(this);
+        ownedCars.add(car);
     }
 }

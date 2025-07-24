@@ -3,11 +3,12 @@ package com.gretacvdl.car_api.dtos;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
 
 public class RequestOwnerDTO {
 
     @NotNull(message = "Votre nom ne peut pas être null")
-    @Min(value = 3, message = "Votre nom doit avoir au moins 3 caractères.")
+    @Length(min = 3, message = "Votre nom doit avoir au moins 3 caractères.")
     private String name;
 
     @NotNull(message = "Votre nom ne peut pas être null")
