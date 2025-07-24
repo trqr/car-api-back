@@ -19,10 +19,8 @@ public class OwnerService {
     }
 
     public Owner getOwner(Long ownerId){
-        if (!ownerRepository.existsById(ownerId)){
-            throw new IllegalArgumentException("le propriétaire ${ownerId} nexiste pas !");
-        }
-        return ownerRepository.getReferenceById(ownerId);
+        return ownerRepository.findById(ownerId)
+                .orElseThrow(() -> new IllegalArgumentException("le propriétaire ${ownerId} nexiste pas !"));
     }
 
     public Owner createOwner(RequestOwnerDTO request){
