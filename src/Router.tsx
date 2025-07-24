@@ -11,12 +11,12 @@ export const router = createBrowserRouter([
         loader: () => getMakers()
     },
     {
-        path: "/cars/:makerId",
+        path: "/carmodels/:makerId",
         element: <MakerPage/>,
         loader: ({params: {makerId}}) => getMakerCars(makerId!)
     },
     {
-        path: "/cars",
+        path: "/carmodels",
         element: <MakerPage/>,
         loader: () => getAllCars()
     }

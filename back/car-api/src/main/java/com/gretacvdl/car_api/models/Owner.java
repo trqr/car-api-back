@@ -17,6 +17,9 @@ public class Owner {
     @OneToMany
     private List<Car> ownedCars;
 
+    public Owner(String name, String email) {
+    }
+
     public Long getId() {
         return id;
     }

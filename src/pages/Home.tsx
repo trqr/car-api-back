@@ -4,6 +4,7 @@ import MakersList from "../common/components/MakersList/MakersList.tsx";
 import {Container} from "@mui/material";
 import {useLoaderData} from "react-router-dom";
 import TextType from "../common/components/TextType/TextType.tsx";
+import InfiniteMenu from "../common/components/InfiniteMenu/InfiniteMenu.tsx";
 
 type flowingMenuType = {
     link: string;
@@ -19,6 +20,33 @@ type InfiniteMenuType = {
 }
 
 
+const itemstest = [
+    {
+        image: 'https://picsum.photos/300/300?grayscale',
+        link: 'https://google.com/',
+        title: 'Item 1',
+        description: 'This is pretty cool, right?'
+    },
+    {
+        image: 'https://picsum.photos/400/400?grayscale',
+        link: 'https://google.com/',
+        title: 'Item 2',
+        description: 'This is pretty cool, right?'
+    },
+    {
+        image: 'https://picsum.photos/500/500?grayscale',
+        link: 'https://google.com/',
+        title: 'Item 3',
+        description: 'This is pretty cool, right?'
+    },
+    {
+        image: 'https://picsum.photos/600/600?grayscale',
+        link: 'https://google.com/',
+        title: 'Item 4',
+        description: 'This is pretty cool, right?'
+    }
+];
+
 const Home = () => {
     const carBrands = useLoaderData();
     const [flowingMenuItems, setFlowingMenuItems] = useState<flowingMenuType[]>([]);
@@ -27,18 +55,18 @@ const Home = () => {
 
     useEffect(() => {
         const items: flowingMenuType[] = carBrands.map((brand) => ({
-            link: `/cars/${brand.id}`,
+            link: `/carmodels/${brand.id}`,
             text: brand.name,
             image: brand.logoPath
         }));
 
-        const infiItems: InfiniteMenuType[] = carBrands.map(brand => ({
+        const infiItems: InfiniteMenuType[] = carBrands.slice(0,8).map(brand => ({
             image: brand.logoPath,
-            link: `/brands/${brand.name.toLowerCase()}`,
+            link: `carmodels/${brand.id}`,
             title: brand.name,
             description: brand.country
         }));
-        console.log(carBrands);
+        console.log(infiItems);
         setFlowingMenuItems(items);
         setInfiniteMenuItems(infiItems);
     }, []);
@@ -46,6 +74,7 @@ const Home = () => {
     return (
         <>
             <Container>
+                <InfiniteMenu items={infiniteMenuItems}></InfiniteMenu>
                 <TextType
                     style={{
                         display: "block",
