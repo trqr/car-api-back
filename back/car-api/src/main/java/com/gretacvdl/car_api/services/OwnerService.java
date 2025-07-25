@@ -1,6 +1,7 @@
 package com.gretacvdl.car_api.services;
 
 import com.gretacvdl.car_api.dtos.RequestOwnerDTO;
+import com.gretacvdl.car_api.exceptions.OwnerAlreadyExistsException;
 import com.gretacvdl.car_api.models.Owner;
 import com.gretacvdl.car_api.repositories.OwnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class OwnerService {
     }
 
     public Owner createOwner(RequestOwnerDTO request){
+        if (ownerRepository.existsByEmail(request.getEmail())) {
+            throw new OwnerAlreadyExistsException("Cet email est déja utilisé.");
+        }
         Owner newOwner = new Owner(request.getName(), request.getEmail());
         return ownerRepository.save(newOwner);
     }
